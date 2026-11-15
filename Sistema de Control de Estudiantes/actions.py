@@ -39,19 +39,18 @@ def get_students_data(students):
         print(student)
 
 def get_students_average(students_list):
-    students_average = []
-    for student in students_list:
-        student_dict = {}
-        spanish = float(student.get('spanish_grade'))
-        english = float(student.get('english_grade'))
-        social_studies = float(student.get('social_studies_grade'))
-        science = float(student.get('science_grade'))
-        student_average = (spanish + english + social_studies + science) / 4
-        student_dict['name'] = student.get('name')
-        student_dict['class'] = student.get('class')
-        student_dict['average'] = student_average
-        students_average.append(student_dict)
-    return students_average
+    try: 
+        students_average = 0.00
+        for student in students_list:
+            spanish = float(student.get('spanish_grade'))
+            english = float(student.get('english_grade'))
+            social_studies = float(student.get('social_studies_grade'))
+            science = float(student.get('science_grade'))
+            students_average += (spanish + english + social_studies + science) / 4
+        students_average = students_average / len(students_list)
+        return students_average
+    except  ZeroDivisionError as error:
+        print(f"Error al dividir por cero. No hay estudiantes registrados. Error: {error}")
 
 def get_top(students_list):
     all_grades = []
