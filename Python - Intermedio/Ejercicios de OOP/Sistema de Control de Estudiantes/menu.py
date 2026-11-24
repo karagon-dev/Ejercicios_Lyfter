@@ -19,9 +19,13 @@ def menu():
             elif choice == '2':
                 actions.get_students_data(students)
             elif choice == '3':
-                print(actions.get_top(students))
+                for student in actions.get_top(students):
+                    print(f"{student.name} de la clase {student.class_}, tuvo un promedio de {student.get_average()}")
             elif choice == '4':
-                print(actions.get_students_average(students))
+                result = actions.get_students_average(students)
+                if result == None:
+                    print("No hubieron estudiantes para obtener un promedio válido.")
+                else: print(result)
             elif choice == '5':
                 data.export_csv(students)
             elif choice == '6':

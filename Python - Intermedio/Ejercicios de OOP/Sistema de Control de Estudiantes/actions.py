@@ -49,26 +49,15 @@ def get_students_average(students):
     try: 
         students_average = 0.00
         for student in students:
-            students_average += (student.spanish_grade + student.english_grade + student.social_studies_grade + student.science_grade) / 4
+            students_average += student.get_average()
         students_average = students_average / len(students)
         return students_average
     except  ZeroDivisionError as error:
         print(f"Error al dividir por cero. No hay estudiantes registrados. Error: {error}")
 
 def get_top(students):
-    all_grades = []
-    for student in students:
-        grade_per_student = {}
-        grades_average = (student.spanish_grade + student.english_grade + student.social_studies_grade + student.science_grade) / 4
-        grade_per_student['name'] = student.name
-        grade_per_student['class'] = student.class_
-        grade_per_student['grade_average'] = grades_average
-        all_grades.append(grade_per_student)
-    all_grades.sort(key=get_average, reverse=True)
-    return all_grades[:3]
-
-def get_average(student):
-    return student['grade_average']
+    students.sort(key=lambda student: student.get_average(), reverse=True)
+    return students[:3]
 
 def get_grade():
     while True:
